@@ -40,7 +40,7 @@ void fermer(F *f);
 int  ouvrir(char nom_fichier[], char mode , F**fp);
 //void Alloc_bloc(F* fichier);
 void genere();
-
+void num_to_string(int num, int max, char * s);
 
 
 

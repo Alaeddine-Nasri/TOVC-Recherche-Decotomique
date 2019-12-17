@@ -114,6 +114,7 @@ void genere(){
     Buffer buff;
     int i=0,ch = 0,enrg=0,j=0;
     int taille = 0,cle= 0;
+    char scle[10],staille[3];
     printf("entre la taille des enrg!");
     scanf("%d",&enrg);
 
@@ -123,10 +124,17 @@ void genere(){
         printf(" la taille %d \n",taille);
         if( ch + 14 + taille <512 ){
             ch = ch + taille + 14;
-            sprintf(buff.tab,"%d%d%d",taille);
-            printf("%c %c %c",buff.tab[j],buff.tab[j+1],buff.tab[j+2]);
+            /** Taille + cle + 'F' **/
+            num_to_string(taille,3,staille);
+            sprintf(buff.tab,"%s",staille);
             sprintf(buff.tab,"%c",'F');
-            printf("%c",buff.tab[j]);
+            cle++;
+            num_to_string(cle,10,scle);
+            sprintf(buff.tab,"%s",scle);
+            /**   Data!   **/
+            //printf("here!");
+          //  sprintf(buff.tab,"%c",'F');
+          //  printf("%c",buff.tab[j]);
         }
         else{
 
@@ -155,6 +163,7 @@ void genere(){
 
 
 
+
   // buff.tab[j] = (taille/100);
          //   printf("%d",buff.tab[j]);
            // j = j +1;
@@ -166,4 +175,14 @@ void genere(){
       //      j++;
        //     buff.tab[j] = 'F';
             //printf("%c",buff.tab[j]);
+void num_to_string(int num, int max, char * s)  // fonction qui tranforme un entier en chaine de characteres
+{
+    char s_num[10];
 
+    sprintf(s_num,"%d",num);
+
+    int j = max - strlen(s_num) ;
+    sprintf(s,"%s","");
+    while (j > 0) {sprintf(s,"%s0",s);j--;}
+    sprintf(s,"%s%s",s,s_num);
+}
