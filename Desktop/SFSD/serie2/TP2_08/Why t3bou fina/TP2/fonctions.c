@@ -184,10 +184,13 @@ void recheche_deco(char nom[30])
      F *f;
     ouvrir(nom,'A',&f);
     Buffer buff;
+    char staille[]= "",scle[10];
+    int taille = 0;
     int nbloc=10;
     int i =0;
     int rcle=0;
     int j=0;
+    int k = 0;
     int deco = 0,max =0,min=0;
     bool trouv = false;
     nbloc = entete(f);
@@ -214,7 +217,24 @@ void recheche_deco(char nom[30])
         }
         else {
             printf("\ We r in !\n");
-            printf("this is deco %d",deco);
+            printf("Le numero du bloc est = %d\n",deco);
+            staille[0] = buff.tab[0];
+            staille[1] = buff.tab[1];
+            staille[2] = buff.tab[2];
+            staille[3] = '\0';
+            taille = atoi(staille);
+          //  taille = atoi(buff.tab[0])*100;
+         //   taille = taille +atoi(buff.tab[1])*10;
+          //  taille = taille +atoi(buff.tab[2]);
+            printf("taillle est %d",taille);
+            k = 0;
+            for(j=4;j<14;j++)
+                {
+                    scle[k] = buff.tab[j];
+                    k++;
+                }
+                scle[10] = '\n';
+                printf("scle est = %s",scle);
             trouv = true;
         }
     }
