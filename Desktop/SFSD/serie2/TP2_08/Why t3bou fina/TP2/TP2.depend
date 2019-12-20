@@ -1,11 +1,11 @@
 # depslib dependency file v1.0
-1576850201 source:c:\users\dell\desktop\sfsd\serie2\tp2_08\why t3bou fina\tp2\main.c
+1576851461 source:c:\users\dell\desktop\sfsd\serie2\tp2_08\why t3bou fina\tp2\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"fonctions.c"
 
-1576850359 c:\users\dell\desktop\sfsd\serie2\tp2_08\why t3bou fina\tp2\fonctions.c
+1576851633 c:\users\dell\desktop\sfsd\serie2\tp2_08\why t3bou fina\tp2\fonctions.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

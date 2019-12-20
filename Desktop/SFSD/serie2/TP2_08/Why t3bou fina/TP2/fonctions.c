@@ -118,6 +118,7 @@ void genere(char nom[20]){
     int i=0,ch = 0,enrg=0,j=0,neww=1;
     int taille = 0,cle= 0;
     int k = 0;
+    int a=0;
     int dir = 1;
     char scle[11],staille[3],sdata[498];
     sdata[0] = '\0';
@@ -132,73 +133,41 @@ void genere(char nom[20]){
         }
         if (neww==1){
         taille = rand()%300 + 1;}
-     //  printf("la taille %d\n",taille);
         if( ch + 14 + taille <512 ){  //Non chauvauchement
             ch = ch + taille + 14;
             neww = 1;
+
             /** Taille + cle + 'F' **/
+
             num_to_string(taille,3,staille);
-           // strcat(staille,buff.tab);
-            //printf("%s",staille);
-           // printf("okeiitou %s",buff.tab);
-            //sprintf(buff.tab,"%s%s",buff.tab,scle);sprintf(buff.tab,"%s","");
             sprintf(buff.tab,"%s%s",buff.tab,staille);
-           // sprintf(buff.tab,"%s%s",buff.tab,staille);
-            //strcat(buff.tab,staille);
             sprintf(buff.tab,"%s%c",buff.tab,'F');
             cle++;
             num_to_string(cle,10,scle);
             sprintf(buff.tab,"%s%s",buff.tab,scle);
-           // printf("\n \n 9bl data %s \n",buff.tab);
+
             /**   Data!   **/
+
             sdata[0] = '\0';
             rand_string(taille-1,sdata);
-         //   printf("\n \n data %s \n",sdata);
-           // printf("%s \n",sdata);
             sprintf(buff.tab,"%s%s",buff.tab,sdata);
-        //    for(j=0;j<ch;j++){
-        //        printf("this is %c \n",buff.tab[j]);
-         //   }
-         //printf("\n\n buffer ! : \n\n%s",buff.tab);
-            //printf("this is %c",buff.tab[10]);
-            //printf("here!");
-          //  sprintf(buff.tab,"%c",'F');
-      //    printf("\nBuffer \n%s",buff.tab);
-          //sprintf(buff.tab,"");
-           // printf("%c",buff.tab[j]);
-
         }
         else{
-                printf("\n**********new bloc*******************\n ");
+                //printf("\n**********new bloc*******************\n ");
             i = i -1;
             neww = 0;
             buff.pos_libre = ch+1;
-             /*  for(j=0;j<ch;j++){
-                printf("this is %c \n",buff.tab[j]);
-           }*/
-            //printf("\n\n\nposlibre is %d de dir = %d    \n",buff.pos_libre,dir);
-          //  printf("cle is cle = %d",cle);
-
-            //printf("cle inf de bloc %d est =%d      ",dir,buff.cle_inf);
             buff.cle_sup = cle;
-            //printf("cle sup de bloc %d est =%d      ",dir,buff.cle_sup);
             ch = 0;
             ecriredir(f,dir,&buff);
-            //printf("le buffer %s" , buff.tab);
             dir ++;
             aff_entete(f , dir-1);
             sprintf(buff.tab,"");
-            //buff.tab[0]= '\0';
             }
    }
-   //fermer(f);
-   //ouvrir("fichier.txt",'A',&f);
-   printf("\n entete  %d\n\n" , entete(f));
-
-   //liredir(f,5,&buff2);
-//printf("why its %d \n",dir);
-printf("\n *************************************************\n \n");
-            for(j=1;j<4;j++)
+    printf("\n entete =  %d\n\n" , entete(f));
+    a = entete(f);
+            for(j=1;j<a;j++)
                 {
                 liredir(f,j,&buff2);
                 printf("\n **************************Block numero %d ***********************\n",j);
@@ -207,27 +176,51 @@ printf("\n *************************************************\n \n");
                 printf("cle sup de bloc est =  %d    \n",buff2.cle_sup);
                 printf("cle inf de bloc  est = %d est      \n",buff2.cle_inf);
                 }
-
-          //      k = 0;
-          //      printf("\n this is s taille %s \n",staille);
-           /**     for(j=4;j<14;j++)
-                {
-                    scle[k] = buff2.tab[j];
-                    k++;
-                }
-                cle = atoi(scle);**/
-             //   printf("\n this is scle %s \n",scle);
-              /*  k = 0;
-                for(j=0;j<3;j++){
-                    staille[k] = buff2.tab[j];
-                    k++;
-                }
-                printf("\n this is s taille %s \n",staille);
-                taille = atoi(staille);*/
-           //     printf("\nthis is cle dhuka ! %d this is staille \n",cle);
-               // printf("tab is %s \n",buff2.tab);
         fermer(f);
 }
+
+void recheche_deco(char nom[30])
+{
+     F *f;
+    ouvrir(nom,'A',&f);
+    Buffer buff;
+    int nbloc=10;
+    int i =0;
+    int rcle=0;
+    int j=0;
+    int deco = 0,max =0,min=0;
+    bool trouv = false;
+    nbloc = entete(f);
+    printf("this is l'entete reche %d\n", nbloc);
+    liredir(f,nbloc,&buff);
+    printf("Donner la cle a recherche!\n");
+    scanf("%d",&rcle);
+    if(rcle> buff.cle_sup || rcle< 1){printf("n'existe pas");}
+    else{
+    deco = nbloc/2;
+    max = nbloc;
+    min = 0;
+    while( !trouv && i != 512){
+        liredir(f,deco,&buff);
+        if (rcle > buff.cle_sup){
+                printf("\nbigger !\n");
+            min = deco;
+            deco = (max + min)/2;
+        }
+        else if (rcle < buff.cle_inf){
+            printf("\smaller !\n");
+            max = deco;
+            deco = (max + min) / 2;
+        }
+        else {
+            printf("\ We r in !\n");
+            printf("this is deco %d",deco);
+            trouv = true;
+        }
+    }
+    }
+}
+
 
 void num_to_string(int num, int max, char * s)  // fonction qui tranforme un entier en chaine de characteres
 {
@@ -254,45 +247,6 @@ void rand_string(int taille, char * s){
     s[taille+1]= '\0';
     //printf("%s", s);
 }
-void recheche_deco(char nom[30])
-{
-     F *f;
-    ouvrir(nom,'A',&f);
-    Buffer buff;
-    int nbloc=10;
-    int i =0;
-    int rcle=0;
-    int j=0;
-    int deco = 0,max =0,min=0;
-    bool trouv = false;
-    nbloc = entete(f);
-    printf("this is l'entete reche %d\n", nbloc);
-   // liredir(f,2,&buff);
-    printf("Donner la cle a recherche!\n");
-    scanf("%d",&rcle);
-    if(rcle> a || rcle< 1){printf("n'existe pas");}
-    else{
-    deco = a/2;
-    max = a;
-    min = 0;
-    while( !trouv && i != 512){
-        liredir(f,deco,&buff);
-        if (rcle > buff.cle_sup){
-                printf("\nbigger !\n");
-            min = deco;
-            deco = (max + min)/2;
-        }
-        else if (rcle < buff.cle_inf){
-            printf("\smaller !\n");
-            max = deco;
-            deco = (max + min) / 2;
-        }
-        else {
-            printf("\ We r in !\n");
-        }
-    }
-    }
-}
 
 
 
@@ -363,7 +317,24 @@ void recheche_deco(char nom[30])
 
 
 
-
+  //      k = 0;
+          //      printf("\n this is s taille %s \n",staille);
+           /**     for(j=4;j<14;j++)
+                {
+                    scle[k] = buff2.tab[j];
+                    k++;
+                }
+                cle = atoi(scle);**/
+             //   printf("\n this is scle %s \n",scle);
+              /*  k = 0;
+                for(j=0;j<3;j++){
+                    staille[k] = buff2.tab[j];
+                    k++;
+                }
+                printf("\n this is s taille %s \n",staille);
+                taille = atoi(staille);*/
+           //     printf("\nthis is cle dhuka ! %d this is staille \n",cle);
+               // printf("tab is %s \n",buff2.tab);
 
 
 
