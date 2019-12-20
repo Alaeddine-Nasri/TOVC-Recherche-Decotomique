@@ -119,6 +119,7 @@ void genere(){
     Tbloc buf;
     int i=0,ch = 0,enrg=0,j=0,neww=1;
     int taille = 0,cle= 0;
+    int k = 0;
     int dir = 1;
     char scle[11],staille[3],sdata[498];
     sdata[0] = '\0';
@@ -199,27 +200,34 @@ void genere(){
    //liredir(f,5,&buff2);
 //printf("why its %d \n",dir);
 printf("\n *************************************************\n \n");
+            for(j=1;j<4;j++)
+                {
+                liredir(f,j,&buff2);
+                printf("\n **************************Block numero %d ***********************\n",j);
+                printf("this is buffer tab : \n%s \n",buff2.tab);
+                printf("\n poslibre is lekher  = %d \n",buff2.pos_libre);
+                printf("cle sup de bloc est =  %d    \n",buff2.cle_sup);
+                printf("cle inf de bloc  est = %d est      \n",buff2.cle_inf);
+                }
 
-                liredir(f,1,&buff2);
-                printf("this is %s \n",buff2.tab);
-                printf("\n poslibre is lekher %d \n",buff2.pos_libre);
-                printf("cle sup de bloc %d est    \n",buff2.cle_sup);
-                printf("cle inf de bloc %d est      \n",buff2.cle_inf);
-                printf("\n **************************Block numero 1***********************\n");
-                liredir(f,2,&buff2);
-                printf("this is %s \n",buff2.tab);
-                printf("\n poslibre is lekher %d \n",buff2.pos_libre);
-                printf("cle sup de bloc %d est    \n",buff2.cle_sup);
-                printf("cle inf de bloc %d est      \n",buff2.cle_inf);
-                printf("\n **************************Block numero 2***********************\n");
-                liredir(f,3,&buff2);
-                printf("this is %s \n",buff2.tab);
-                printf("\n poslibre is lekher %d \n",buff2.pos_libre);
-                printf("cle sup de bloc %d est    \n",buff2.cle_sup);
-                printf("cle inf de bloc %d est      \n",buff2.cle_inf);
-                printf("\n **************************Block numero 3***********************\n");
-
-    //printf("tab is %s \n",buff2.tab);
+          //      k = 0;
+          //      printf("\n this is s taille %s \n",staille);
+           /**     for(j=4;j<14;j++)
+                {
+                    scle[k] = buff2.tab[j];
+                    k++;
+                }
+                cle = atoi(scle);**/
+             //   printf("\n this is scle %s \n",scle);
+              /*  k = 0;
+                for(j=0;j<3;j++){
+                    staille[k] = buff2.tab[j];
+                    k++;
+                }
+                printf("\n this is s taille %s \n",staille);
+                taille = atoi(staille);*/
+           //     printf("\nthis is cle dhuka ! %d this is staille \n",cle);
+               // printf("tab is %s \n",buff2.tab);
 
 }
 
@@ -241,12 +249,12 @@ void rand_string(int taille, char * s){
 
     longueurChaine = strlen(chaine);
 
-    for(i=0; i < taille; i++)
+    for(i=0; i < taille+1; i++)
         {
             s[i] = chaine[rand()%longueurChaine];
         }
     s[taille+1]= '\0';
-  //  printf("%s", s);
+    //printf("%s", s);
 }
 void recheche_deco(FILE *f)
 {
