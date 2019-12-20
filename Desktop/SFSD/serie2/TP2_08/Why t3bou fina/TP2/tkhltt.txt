@@ -24,7 +24,7 @@ void liredir(F *fp, int i , Buffer *buf)
    if(i <= entete(fp))
    {
        fseek(fp->file,(sizeof(Entete)+sizeof(Tbloc)*(i-1)),SEEK_SET); // positionnement au debut du bloc numero i
-       fread(buf,sizeof(Buffer),1,fp->file);                         //lecture d'un bloc de caractère correspondant a la taille du bloc dans le buffer
+       fread(buf,sizeof(Buffer),1,fp->file);                         //lecture d'un bloc de caractÃ¨re correspondant a la taille du bloc dans le buffer
        rewind(fp->file);
    }
                                         // repositionnement endebut de fichier
@@ -119,9 +119,8 @@ void genere(){
     Tbloc buf;
     int i=0,ch = 0,enrg=0,j=0,neww=1;
     int taille = 0,cle= 0;
-    int dir = 1;
+    int dir = 0;
     char scle[11],staille[3],sdata[498];
-    sdata[0] = '\0';
     printf("entre la taille des enrg!");
     scanf("%d",&enrg);
     sprintf(buff.tab,"%s","");
@@ -129,7 +128,7 @@ void genere(){
 
    for(i = 0 ; i<enrg+1;i++){
         if (ch ==0){
-            buff.cle_inf = cle+1;
+            buff.cle_inf = cle;
         }
         if (neww==1){
         taille = rand()%300 + 1;}
@@ -143,18 +142,17 @@ void genere(){
             //printf("%s",staille);
            // printf("okeiitou %s",buff.tab);
             //sprintf(buff.tab,"%s%s",buff.tab,scle);sprintf(buff.tab,"%s","");
-            sprintf(buff.tab,"%s%s",buff.tab,staille);
+            sprintf(buff.tab,"%s",staille);
            // sprintf(buff.tab,"%s%s",buff.tab,staille);
             //strcat(buff.tab,staille);
             sprintf(buff.tab,"%s%c",buff.tab,'F');
             cle++;
             num_to_string(cle,10,scle);
             sprintf(buff.tab,"%s%s",buff.tab,scle);
-           // printf("\n \n 9bl data %s \n",buff.tab);
+
             /**   Data!   **/
-            sdata[0] = '\0';
-            rand_string(taille-1,sdata);
-         //   printf("\n \n data %s \n",sdata);
+            rand_string(taille,sdata);
+
            // printf("%s \n",sdata);
             sprintf(buff.tab,"%s%s",buff.tab,sdata);
         //    for(j=0;j<ch;j++){
@@ -164,8 +162,7 @@ void genere(){
             //printf("this is %c",buff.tab[10]);
             //printf("here!");
           //  sprintf(buff.tab,"%c",'F');
-      //    printf("\nBuffer \n%s",buff.tab);
-          //sprintf(buff.tab,"");
+          printf("\nBuffer \n%s",buff.tab);
            // printf("%c",buff.tab[j]);
 
         }
@@ -187,40 +184,22 @@ void genere(){
             ecriredir(f,dir,&buff);
             //printf("le buffer %s" , buff.tab);
             dir ++;
-            aff_entete(f , dir-1);
+            aff_entete(f , dir);
             sprintf(buff.tab,"");
-            //buff.tab[0]= '\0';
+            buff.tab[0]= '\0';
             }
    }
    //fermer(f);
    //ouvrir("fichier.txt",'A',&f);
    printf("\n entete  %d\n\n" , entete(f));
 
-   //liredir(f,5,&buff2);
+   liredir(f,12,&buff2);
 //printf("why its %d \n",dir);
 printf("\n *************************************************\n \n");
-
-                liredir(f,1,&buff2);
-                printf("this is %s \n",buff2.tab);
-                printf("\n poslibre is lekher %d \n",buff2.pos_libre);
-                printf("cle sup de bloc %d est    \n",buff2.cle_sup);
-                printf("cle inf de bloc %d est      \n",buff2.cle_inf);
-                printf("\n **************************Block numero 1***********************\n");
-                liredir(f,2,&buff2);
-                printf("this is %s \n",buff2.tab);
-                printf("\n poslibre is lekher %d \n",buff2.pos_libre);
-                printf("cle sup de bloc %d est    \n",buff2.cle_sup);
-                printf("cle inf de bloc %d est      \n",buff2.cle_inf);
-                printf("\n **************************Block numero 2***********************\n");
-                liredir(f,3,&buff2);
-                printf("this is %s \n",buff2.tab);
-                printf("\n poslibre is lekher %d \n",buff2.pos_libre);
-                printf("cle sup de bloc %d est    \n",buff2.cle_sup);
-                printf("cle inf de bloc %d est      \n",buff2.cle_inf);
-                printf("\n **************************Block numero 3***********************\n");
-
-    //printf("tab is %s \n",buff2.tab);
-
+    printf("tab is %s \n",buff2.tab);
+    printf("\n poslibre is lekher %d \n\n\n",buff.pos_libre);
+   printf("cle sup de bloc %d est    \n",buff2.cle_sup);
+    printf("cle inf de bloc %d est      \n",buff2.cle_inf);
 }
 
 void num_to_string(int num, int max, char * s)  // fonction qui tranforme un entier en chaine de characteres
@@ -241,12 +220,12 @@ void rand_string(int taille, char * s){
 
     longueurChaine = strlen(chaine);
 
+
     for(i=0; i < taille; i++)
         {
             s[i] = chaine[rand()%longueurChaine];
         }
-    s[taille+1]= '\0';
-  //  printf("%s", s);
+   // printf("%s", s);
 }
 void recheche_deco(FILE *f)
 {

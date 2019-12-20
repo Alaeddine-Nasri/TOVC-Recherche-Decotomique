@@ -24,7 +24,7 @@ void liredir(F *fp, int i , Buffer *buf)
    if(i <= entete(fp))
    {
        fseek(fp->file,(sizeof(Entete)+sizeof(Tbloc)*(i-1)),SEEK_SET); // positionnement au debut du bloc numero i
-       fread(buf,sizeof(Buffer),1,fp->file);                         //lecture d'un bloc de caractère correspondant a la taille du bloc dans le buffer
+       fread(buf,sizeof(Buffer),1,fp->file);                         //lecture d'un bloc de caractÃ¨re correspondant a la taille du bloc dans le buffer
        rewind(fp->file);
    }
                                         // repositionnement endebut de fichier

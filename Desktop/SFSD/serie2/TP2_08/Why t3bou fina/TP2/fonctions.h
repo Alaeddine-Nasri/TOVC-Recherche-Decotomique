@@ -14,6 +14,8 @@ typedef struct Tbloc //* structure d'un bloc
    int pos_libre ;
    char cle1[11] ;
    char cle2[11];
+   int cle_inf;
+   int cle_sup;
 
 }
 Tbloc;
@@ -41,6 +43,8 @@ int  ouvrir(char nom_fichier[], char mode , F**fp);
 //void Alloc_bloc(F* fichier);
 void genere();
 void num_to_string(int num, int max, char * s);
+void rand_string(int taille, char * s);
+void recheche_deco(FILE *f);
 
 
 
