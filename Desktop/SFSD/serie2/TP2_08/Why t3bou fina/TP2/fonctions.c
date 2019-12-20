@@ -107,11 +107,9 @@ int  ouvrir(char nom_fichier[], char mode , F**fp)
     //}
 //******************************************************************************
 
-void genere(){
+void genere(char nom[20]){
        F *f;
-       char nom[3];
-       printf("entre le nom");
-       scanf("%s",nom);
+       //char nom[3];
     ouvrir(nom,'N',&f);
 
     Buffer buff;
@@ -228,7 +226,7 @@ printf("\n *************************************************\n \n");
                 taille = atoi(staille);*/
            //     printf("\nthis is cle dhuka ! %d this is staille \n",cle);
                // printf("tab is %s \n",buff2.tab);
-
+        fermer(f);
 }
 
 void num_to_string(int num, int max, char * s)  // fonction qui tranforme un entier en chaine de characteres
@@ -256,36 +254,43 @@ void rand_string(int taille, char * s){
     s[taille+1]= '\0';
     //printf("%s", s);
 }
-void recheche_deco(FILE *f)
+void recheche_deco(char nom[30])
 {
-    Tbloc buff;
-    int a=10;
+     F *f;
+    ouvrir(nom,'A',&f);
+    Buffer buff;
+    int nbloc=10;
     int i =0;
     int rcle=0;
     int j=0;
     int deco = 0,max =0,min=0;
-    bool trouv;
-    ouvrir("fichier.txt",'N',&f);
-    a = entete(f);
+    bool trouv = false;
+    nbloc = entete(f);
+    printf("this is l'entete reche %d\n", nbloc);
    // liredir(f,2,&buff);
-    printf("Donner la cle a recherche!");
+    printf("Donner la cle a recherche!\n");
     scanf("%d",&rcle);
     if(rcle> a || rcle< 1){printf("n'existe pas");}
+    else{
     deco = a/2;
     max = a;
     min = 0;
-    while( ! trouv && i != 512){
+    while( !trouv && i != 512){
         liredir(f,deco,&buff);
         if (rcle > buff.cle_sup){
+                printf("\nbigger !\n");
             min = deco;
             deco = (max + min)/2;
         }
         else if (rcle < buff.cle_inf){
+            printf("\smaller !\n");
             max = deco;
             deco = (max + min) / 2;
         }
         else {
+            printf("\ We r in !\n");
         }
+    }
     }
 }
 

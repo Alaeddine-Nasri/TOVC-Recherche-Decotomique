@@ -8,10 +8,12 @@ int main()
 
     srand(time(NULL));
     printf("Hello world!\n");
-   // FILE *f;
-    genere();
+    char nom[20];
+     printf("entre le nom");
+    scanf("%s",nom);
+    genere(nom);
 
-    //recheche_deco(f);
+    recheche_deco(nom);
  //   rand_string(i,s);
  //   num_to_string(12,10,s);
   //  printf("%s",s);
