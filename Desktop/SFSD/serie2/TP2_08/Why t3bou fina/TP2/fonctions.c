@@ -3,6 +3,10 @@
 #include <string.h>
 #include "fonctions.h"
 #include <time.h>
+#include <windows.h>
+
+
+
 
 
 
@@ -185,9 +189,10 @@ void recheche_deco(char nom[30])
     ouvrir(nom,'A',&f);
     Buffer buff;
     char staille[]= "",scle[10];
-    int taille = 0;
+    int taille = 0,cle = 0;int done = 0;int debut = 0;
     int nbloc=10;
     int i =0;
+    int details = 0;
     int rcle=0;
     int j=0;
     int k = 0;
@@ -206,36 +211,58 @@ void recheche_deco(char nom[30])
     while( !trouv && i != 512){
         liredir(f,deco,&buff);
         if (rcle > buff.cle_sup){
-                printf("\nbigger !\n");
             min = deco;
             deco = (max + min)/2;
         }
         else if (rcle < buff.cle_inf){
-            printf("\smaller !\n");
             max = deco;
             deco = (max + min) / 2;
         }
         else {
-            printf("\ We r in !\n");
-            printf("Le numero du bloc est = %d\n",deco);
-            staille[0] = buff.tab[0];
-            staille[1] = buff.tab[1];
-            staille[2] = buff.tab[2];
+            k = 0;
+            j = 0;
+            done = 0;
+            debut = 0;
+            while (done != 1){
+                j = debut;
+            staille[0] = buff.tab[debut];
+            staille[1] = buff.tab[debut+1];
+            staille[2] = buff.tab[debut+2];
             staille[3] = '\0';
             taille = atoi(staille);
-          //  taille = atoi(buff.tab[0])*100;
-         //   taille = taille +atoi(buff.tab[1])*10;
-          //  taille = taille +atoi(buff.tab[2]);
-            printf("taillle est %d",taille);
             k = 0;
-            for(j=4;j<14;j++)
+            for(j=debut +4;j<debut +14;j++)
                 {
                     scle[k] = buff.tab[j];
                     k++;
                 }
-                scle[10] = '\n';
-                printf("scle est = %s",scle);
+            scle[10] = '\n';
+            cle = atoi(scle);
+            if (rcle==cle){
+                j = debut;
+                if (buff.tab[debut+3]=='F'){
+                color(2,0);
+                printf("\tLe numero du bloc est = %d\n",deco);
+                printf("\tLa position j est = %d\n",j);
+                color(15,0);
+                printf("\n");
+                printf("\tif you want more details press 1 \n");
+                scanf("%d",&details);
+                if (details == 1){
+                color(2,0);
+                printf("\n\t*********** More details *************\n");
+                printf("\ttaillle de la donnée est =   %d\n",taille);
+                printf("\tcle est = %d\n",cle);
+                color(15,0);
+                }
+                }
+                else{printf("la donnee existe mais elle est effacee\n");}
+                done = 1;
+            }
+            else if(cle>rcle){printf("N'existe pas");done = 1;}
+            else{debut = debut + taille+ 14;}
             trouv = true;
+        }
         }
     }
     }
@@ -266,6 +293,11 @@ void rand_string(int taille, char * s){
         }
     s[taille+1]= '\0';
     //printf("%s", s);
+}
+void color(int t,int f)
+{
+        HANDLE H=GetStdHandle(STD_OUTPUT_HANDLE);
+            SetConsoleTextAttribute(H,f*16+t);
 }
 
 
