@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include<stdio.h>
+#include<conio.h>
 #include "fonctions.h"
 #include <time.h>
 #include <windows.h>
@@ -126,7 +128,7 @@ void genere(char nom[20]){
     int dir = 1;
     char scle[11],staille[3],sdata[498];
     sdata[0] = '\0';
-    printf("entre la taille des enrg!");
+    printf("\tentre la taille des enrg \n");
     scanf("%d",&enrg);
     sprintf(buff.tab,"%s","");
 
@@ -169,20 +171,50 @@ void genere(char nom[20]){
             sprintf(buff.tab,"");
             }
    }
-    printf("\n entete =  %d\n\n" , entete(f));
-    a = entete(f);
-            for(j=1;j<a;j++)
-                {
-                liredir(f,j,&buff2);
-                printf("\n **************************Block numero %d ***********************\n",j);
-                printf("this is buffer tab : \n%s \n",buff2.tab);
-                printf("\n poslibre is lekher  = %d \n",buff2.pos_libre);
-                printf("cle sup de bloc est =  %d    \n",buff2.cle_sup);
-                printf("cle inf de bloc  est = %d est      \n",buff2.cle_inf);
-                }
+    printf("\tUn fichier avec le nom : ");
+    color(2,0);
+    printf("%s",nom);
+    color(15,0);
+    printf(" d'un nombre de bloc = ");
+    color(2,0);
+    printf("%d",entete(f));
+    color(15,0);
+    printf(" et un nombre d'enreg = ");
+    color(2,0);
+    printf("%d",enrg);
+    color(15,0);
+    printf(" a etes cree\n\tMerci!\n\n\n");
         fermer(f);
 }
-
+void affichage(char nom[30]){
+    F *f;
+    ouvrir(nom,'A',&f);
+    Buffer buff2;
+    int j = 0,a = 0;
+    a = entete(f);
+    for(j=1;j<a+1;j++)
+            {
+            liredir(f,j,&buff2);
+            printf("\t\n ************************** Block numero %d ***********************\n",j);
+            color(2,0);
+                printf("\tBuffer tab est = ");
+                color(5,0);
+                printf("%s\n",buff2.tab);
+                color(2,0);
+                printf("\tPoslibre is lekher  = ");
+                color(5,0);
+                printf("%d\n",buff2.pos_libre);
+                color(2,0);
+                printf("\tCle sup de bloc est = ");
+                color(5,0);
+                printf("%d\n",buff2.cle_sup);
+                color(2,0);
+                printf("\tCle inf de bloc est = ");
+                color(5,0);
+                printf("%d\n",buff2.cle_inf);
+                color(15,0);
+            }
+}
 void recheche_deco(char nom[30])
 {
      F *f;
@@ -242,8 +274,13 @@ void recheche_deco(char nom[30])
                 j = debut;
                 if (buff.tab[debut+3]=='F'){
                 color(2,0);
-                printf("\tLe numero du bloc est = %d\n",deco);
-                printf("\tLa position j est = %d\n",j);
+                printf("\tLe numero du bloc est = ");
+                color(5,0);
+                printf("%d\n",deco);
+                color(2,0);
+                printf("\tLa position j est = ",j);
+                color(5,0);
+                printf("%d\n",j);
                 color(15,0);
                 printf("\n");
                 printf("\tif you want more details press 1 \n");
@@ -251,8 +288,18 @@ void recheche_deco(char nom[30])
                 if (details == 1){
                 color(2,0);
                 printf("\n\t*********** More details *************\n");
-                printf("\ttaillle de la donnée est =   %d\n",taille);
-                printf("\tcle est = %d\n",cle);
+                printf("\ttaillle de la donnee est = ");
+                color(5,0);
+                printf("%d\n",taille);
+                color(2,0);
+                printf("\tcle est = ");
+                color(5,0);
+                printf("%d\n",cle);
+                color(2,0);
+                printf("\tBuffer tab est = ");
+                color(5,0);
+                liredir(f,deco,&buff);
+                printf("%s\n",buff.tab);
                 color(15,0);
                 }
                 }

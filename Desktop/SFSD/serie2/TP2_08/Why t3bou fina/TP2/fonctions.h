@@ -3,7 +3,8 @@
 
 
 #include <stdbool.h>
-
+#include<stdio.h>
+#include<conio.h>
 
 
 
@@ -45,6 +46,7 @@ void genere(char nom[20]);
 void num_to_string(int num, int max, char * s);
 void rand_string(int taille, char * s);
 void recheche_deco(char nom[30]);
+void affichage(char nom[30]);
 
 
 

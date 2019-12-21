@@ -1,18 +1,24 @@
 # depslib dependency file v1.0
-1576929517 source:c:\users\dell\desktop\sfsd\serie2\tp2_08\why t3bou fina\tp2\main.c
+1576955992 source:c:\users\dell\desktop\sfsd\serie2\tp2_08\why t3bou fina\tp2\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	<stdio.h>
+	<conio.h>
 	"fonctions.c"
 
-1576930085 c:\users\dell\desktop\sfsd\serie2\tp2_08\why t3bou fina\tp2\fonctions.c
+1576956837 c:\users\dell\desktop\sfsd\serie2\tp2_08\why t3bou fina\tp2\fonctions.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	<stdio.h>
+	<conio.h>
 	"fonctions.h"
 	<time.h>
 	<windows.h>
 
-1576850194 c:\users\dell\desktop\sfsd\serie2\tp2_08\why t3bou fina\tp2\fonctions.h
+1576955564 c:\users\dell\desktop\sfsd\serie2\tp2_08\why t3bou fina\tp2\fonctions.h
 	<stdbool.h>
+	<stdio.h>
+	<conio.h>
 
