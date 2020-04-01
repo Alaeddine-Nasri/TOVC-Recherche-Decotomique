@@ -51,8 +51,16 @@ export default function App() {
                 </TouchableOpacity>
           </View> 
         <View style={styles.body}>
-              <Text style = {styles.title}>Add{"\n"}Task</Text>
-              <TextInput placeholder='Type'></TextInput>
+              <Text style = {styles.title}>Work</Text>
+              <View style={styles.taskbox}>
+                  <Text style={styles.taskname}>First task : name of the task 
+                  coding the website fx
+                  </Text>
+                  <View style={styles.time}>
+                      <Text style={styles.timetext}>28 - Nov</Text>
+                      <Text style={styles.timetext}>10:00- 13:00</Text>
+                  </View>
+              </View>
               <View style={styles.taskbox}>
                   <Text style={styles.taskname}>First task : name of the task 
                   coding the website fx
